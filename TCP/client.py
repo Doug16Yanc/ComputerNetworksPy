@@ -64,8 +64,7 @@ def conversation(tcp_connection):
     print("Exiting...\n")     
     close_connection(tcp_connection)
     
-if __name__ == "__main__":
-
+def main():
     connection = connecting()
     conversation(connection)
 
@@ -74,3 +73,5 @@ if __name__ == "__main__":
     except:
         print("The TCP connection is end.\n")
 
+if __name__ == "__main__":
+    main()

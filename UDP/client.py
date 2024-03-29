@@ -43,16 +43,22 @@ def conversation(udp_connection):
             udp_connection.sendto(bytes(message, "utf-8"))
             if message == "exit":
                 break
+
         recv_message, addr = udp_connection.recvfrom(BUFFER)
 
-        if recv_message.strip():
-            print(f"Server message: {recv_message.decode('utf-8')}") 
-        if recv_message.decode('utf-8') == 'exit':
-            print("The server side just ended the connection. Enter 'exit' to end the connection.\n")
+        if recv_message:
+            decoded_message = recv_message.decode('utf-8')
+            if decoded_message == 'exit':
+                print("The server side just ended the connection. Enter 'exit' to end the connection.\n")
+                break
+            print(f"Server message: {decoded_message}") 
 
     print("Exiting...\n")     
     close_connection(udp_connection)
     
-if __name__ == "__main__":
+def main():
     connection = connecting()
     conversation(connection)
+
+if __name__ == "__main__":
+    main()
